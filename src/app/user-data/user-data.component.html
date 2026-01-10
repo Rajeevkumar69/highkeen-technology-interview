@@ -1,0 +1,19 @@
+<table>
+     <thead>
+          <tr>
+               <th>Name</th>
+               <th>Age</th>
+               <th>Home town</th>
+               <th>Pin code</th>
+          </tr>
+     </thead>
+
+     <tbody>
+          <tr *ngFor="let data of userData">
+               <td>{{ data.name }}</td>
+               <td>{{ data.age }}</td>
+               <td>{{ data.address.hometown }}</td>
+               <td>{{ data.address.pincode }}</td>
+          </tr>
+     </tbody>
+</table>
