@@ -10,28 +10,25 @@ import { DataService } from '../shared/service/data.service';
      styleUrl: './user-data.component.scss'
 })
 export class filteredUserDataComponent implements OnInit {
+     private originalUserData: any[] = [];
      public filteredUserData: any[] = [];
-     private originalfilteredUserData: any[] = [];
 
-     constructor(private dataService: DataService) { }
+     constructor(
+       private dataService: DataService
+     ) { }
 
      ngOnInit(): void {
-          this.originalfilteredUserData = this.dataService.getfilteredUserData();
-          this.filteredUserData = JSON.parse(JSON.stringify(this.originalfilteredUserData));
+          this.originalUserData = this.dataService.getUserData();
+          this.filteredUserData = JSON.parse(JSON.stringify(this.originalUserData));
      }
 
      public searchUser(searchText: string) {
-          if (!searchText) {
-               this.filteredUserData = [...this.originalfilteredUserData];
-               return;
-          }
-
           const text = searchText.toLowerCase();
 
-          this.filteredUserData = this.originalfilteredUserData.filter(u =>
-               u.name.toLowerCase().includes(text) ||
-               u.address.hometown.toLowerCase().includes(text) ||
-               String(u.address.pincode).includes(text)
+          this.filteredUserData = this.originalUserData.filter(user =>
+               user.name.toLowerCase().includes(text) ||
+               user.address.hometown.toLowerCase().includes(text) ||
+               user.address.pincode.toString().includes(text)
           );
      }
 }
